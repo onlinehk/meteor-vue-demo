@@ -12,10 +12,18 @@ Vue.use(VueTracker);
 import VueMeta from 'vue-meta';
 Vue.use(VueMeta);
 
+import BootstrapVue from 'bootstrap-vue';
+Vue.use(BootstrapVue);
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+import { globalMixin } from '/imports/js/main'
+Vue.mixin(globalMixin);
+
 import routerFactory from './routes';
 
 // Main app
-import AppLayout from '/imports/ui/AppLayout.vue';
+import AppLayout from '/client/ui/AppLayout.vue';
 
 Meteor.startup(() => {
   // Start the router

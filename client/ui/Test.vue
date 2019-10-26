@@ -5,6 +5,12 @@
 </div>
 </template>
 
+<style lang="css" scoped>
+.test {
+	margin: 0 30px;
+}
+</style>
+
 <script>
 export default {
   data: () => ({

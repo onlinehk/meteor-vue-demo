@@ -8,8 +8,8 @@ const routerFactory = new RouterFactory({
 });
 
 // Components
-import App from '/imports/ui/App.vue';
-import Test from '/imports/ui/Test.vue';
+import App from '/client/ui/App/App.vue';
+import Test from '/client/ui/Test.vue';
 
 RouterFactory.configure(router => {
     router.addRoutes([
