@@ -3,6 +3,7 @@ $mainColor: #40b883;
 body {
 	font-family: sans-serif;
 	h1 { color: $mainColor; }
+	margin-top: 70px !important;
 }
 
 .navbar {
@@ -17,17 +18,16 @@ body {
 		float: left;
 		width: 50%;
 		text-align: center;
-		border-right: 1px solid #fff;
 		padding: 15px;
+		&:not(:first-child) {
+			border-left: 1px solid #fff;
+		}
 		a {
 			color: #fff;
 		}
-		.router-link-exact-active.router-link-active {
+		.router-link-active {
 			font-weight: bold;
 			color: #000;
 		}
 	}
-}
-.navbarPadding {
-	height: 70px;
 }

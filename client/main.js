@@ -17,6 +17,9 @@ Vue.use(BootstrapVue);
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+import animated from 'animate.css';
+Vue.use(animated);
+
 import { globalMixin } from '/imports/js/main'
 Vue.mixin(globalMixin);
 

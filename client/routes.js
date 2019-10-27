@@ -10,6 +10,7 @@ const routerFactory = new RouterFactory({
 // Components
 import App from '/client/ui/App/App.vue';
 import Test from '/client/ui/Test.vue';
+import ErrorPage from '/client/ui/ErrorPage.vue';
 
 RouterFactory.configure(router => {
     router.addRoutes([
@@ -22,6 +23,13 @@ RouterFactory.configure(router => {
             path: '/test',
             name: 'Test',
             component: Test,
+            children: [
+                { path: 'post/:id' }
+            ]
+        },
+        {
+            path: '*',
+            component: ErrorPage // 404 page not found
         }
     ]);
 });

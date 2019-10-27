@@ -60,17 +60,4 @@
 </div>
 </template>
 <script src="./App.js"></script>
-
-<style lang="css" scoped>
-.app {
-	margin: 0 30px;
-}
-
-h1, h2 {
-	font-weight: normal;
-}
-
-.date {
-	color: grey;
-}
-</style>
+<style scoped src="./App.scss"></style>
