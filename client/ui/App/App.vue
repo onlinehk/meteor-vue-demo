@@ -60,4 +60,3 @@
 </div>
 </template>
 <script src="./App.js"></script>
-<style scoped src="./App.scss"></style>
