@@ -1,6 +1,7 @@
 import { Session } from 'meteor/session';
 // import Test from '../Test.vue';
-import { Links } from '/lib/collections';
+// import { Links } from '/lib/collections';
+import { meteors } from '/imports/api/app';
 
 Session.setDefault("counter", 0);
 
@@ -11,6 +12,7 @@ let labels = ['Click me!', 'Click me again!', 'Here! Click here!', 'Again! Again
     'No really, you can click me as much as you want.', 'Click me to level up!'];
 
 export default {
+    mixins: [meteors],
     data() {
         return {
             buttonLabel: 'Click me!',
@@ -18,7 +20,7 @@ export default {
             editMode: [],
             newTitle: '',
             newURL: '',
-            search: ''
+            search: '',
         }
     },
     methods: {
@@ -78,32 +80,9 @@ export default {
     metaInfo: {
         title: 'Meteor + Vue',
     },
-    meteor: {
-        // Subscriptions
-        $subscribe: {
-            // We subscribe to the 'links' publication
-            'links': []
-        },
-        links() {
-            if (this.search) {
-                return Links.find({ "title": { $regex: new RegExp(this.search, "i") } }, { sort: { createdAt: -1 } }).fetch()
-            } else {
-                var rtn = Links.find({}, { sort: { createdAt: -1 } }).fetch();
-                for (const key in rtn) {
-                    if (rtn[key].createdAt) {
-                        rtn[key].createdAt = this.formatDate(rtn[key].createdAt);
-                    }
-                    if (rtn[key].updatedAt) {
-                        rtn[key].updatedAt = this.formatDate(rtn[key].updatedAt);
-                    }
-                }
-                return rtn;
-            }
-        }
-    },
     computed: {
         countLinks() {
-            return this.links.length
+            return this.links ? this.links.length : 0;
         }
     }
 };
