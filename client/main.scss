@@ -3,31 +3,32 @@ $mainColor: #40b883;
 body {
 	font-family: sans-serif;
 	h1 { color: $mainColor; }
-	margin-top: 70px !important;
 }
 
-.navbar {
-	position: fixed !important;
-	width: 100%;
-	top: 0;
-	left: 0;
-	background-color: $mainColor;
-	padding: 0 !important;
-	margin-bottom: 30px;
-	.item {
-		float: left;
-		width: 50%;
-		text-align: center;
-		padding: 15px;
-		&:not(:first-child) {
-			border-left: 1px solid #fff;
-		}
-		a {
-			color: #fff;
-		}
-		.router-link-active {
-			font-weight: bold;
-			color: #000;
+.navbarOutner {
+	margin-top: 70px;
+	.navbar {
+		position: fixed !important;
+		width: 100%;
+		top: 0;
+		left: 0;
+		background-color: $mainColor;
+		padding: 0 !important;
+		.item {
+			float: left;
+			width: 50%;
+			text-align: center;
+			padding: 15px;
+			&:not(:first-child) {
+				border-left: 1px solid #fff;
+			}
+			a {
+				color: #fff;
+			}
+			.router-link-active {
+				font-weight: bold;
+				color: #000;
+			}
 		}
 	}
 }

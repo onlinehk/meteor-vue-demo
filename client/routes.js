@@ -40,16 +40,12 @@ RouterFactory.configure(router => {
             ]
         },
         {
-            path: '/error',
-            name: 'Error',
+            path: '*',
+            // component: ErrorPage // 404 page not found
             components: {
                 nav: ErrorNav,
                 default: ErrorPage
             }
-        },
-        {
-            path: '*',
-            component: ErrorPage // 404 page not found
         }
     ]);
 });
