@@ -6,6 +6,8 @@
 <style scoped>
 h1 {
   text-align: center;
-  margin-top: 45%;
+  position: absolute;
+  top: 45%;
+  width: 100%;
 }
 </style>
