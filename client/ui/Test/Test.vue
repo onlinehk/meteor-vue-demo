@@ -43,5 +43,8 @@ export default {
 	data: () => ({
 		message: 'Test Page',
 	}),
+	metaInfo: {
+        title: 'Meteor + Vue (Test)',
+    },
 }
 </script>
