@@ -13,6 +13,7 @@ import App from '/client/ui/App/App.vue';
 import Test from '/client/ui/Test/Test.vue';
 import TestPage1 from '/client/ui/Test/TestPage1.vue';
 import TestPage2 from '/client/ui/Test/TestPage2.vue';
+import About from '/client/ui/AboutPage.vue';
 import ErrorNav from '/client/ui/ErrorNav.vue';
 import ErrorPage from '/client/ui/ErrorPage.vue';
 
@@ -38,6 +39,14 @@ RouterFactory.configure(router => {
                 { path: 'page/1', component: TestPage1 },
                 { path: 'page/2', component: TestPage2 },
             ]
+        },
+        {
+            path: '/about',
+            name: 'About',
+            components: {
+                nav: MainNav,
+                default: About
+            }
         },
         {
             path: '*',
