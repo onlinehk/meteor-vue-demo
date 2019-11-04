@@ -4,8 +4,9 @@ import prerenderio from 'prerender-node';
 import { WebApp } from 'meteor/webapp'; 
 
 if (Meteor.isServer) {
-	Meteor.publish('links', function () {
-		return Links.find();
+	Meteor.publish('links', function (limit, search) {
+		Meteor._sleepForMs(1000);
+		return Links.find({ "title": { $regex: new RegExp(search, "i") }}, {sort: { createdAt: -1 }, limit: limit});
 	});
 
 	Meteor.methods({
@@ -17,7 +18,7 @@ if (Meteor.isServer) {
 		},
 		editSubmit: function (_id, title, url) {
 			Links.update({ _id: _id }, { $set: { title: title, url: url, updatedAt: new Date() } });
-		},
+		}
 	})
 
 	function insertLink(title, url) {

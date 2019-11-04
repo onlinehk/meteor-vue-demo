@@ -30,7 +30,6 @@
 	<div class="float-right"><input class="form-control" placeholder="Search" v-model="search" /></div>
 
 	<hr />
-	<div v-if="!$subReady.links">Loading...</div>
 	<div v-if="links && links.length == 0 && search">Empty</div>
 	<div v-else>
 		<div v-for="link in links" :key="link._id">
@@ -57,6 +56,10 @@
 			<hr />
 		</div>
 	</div>
+    <div v-if="!$subReady.links">Loading...</div>
+    <div v-if="limit == links.length">
+        <div class="text-center"><button class="btn btn-primary" @click="loadMore">Load More</button></div>
+    </div>
 	<p>Totals: {{countLinks}}</p>
 </div>
 </template>
@@ -82,9 +85,11 @@ export default {
             buttonLabel: 'Click me!',
             count: 0,
             editMode: [],
-            newTitle: '',
-            newURL: '',
+            newTitle: 'Demo',
+            newURL: 'http://www.test.com',
             search: '',
+            perPage: 3,
+            limit: 3
         }
     },
     methods: {
@@ -97,9 +102,9 @@ export default {
         // Add / Edit DB
         addData() {
             if (this.newTitle && this.newURL) {
-                Meteor.call('addData', this.newTitle.trim(), this.newURL.trim());
+                Meteor.call('addData', this.newTitle, this.newURL);
                 this.newTitle = '';
-                this.newURL = '';
+                this.newURL = 'http://www.test.com';
             }
         },
 
@@ -111,7 +116,7 @@ export default {
         // Delete DB
         deleteData(_id) {
             Meteor.call('deleteData', _id);
-            this.newTitle = '';
+            this.newTitle = 'Demo';
             this.newURL = '';
         },
         // End Delete DB
@@ -119,7 +124,7 @@ export default {
         // List DB Submit Buttn
         editSubmit(_id) {
             if (_id) {
-                var $_id = 'form_' + _id;
+                const $_id = 'form_' + _id;
                 Meteor.call('editSubmit', _id, this.$refs[$_id][0].title.value.trim(), this.$refs[$_id][0].url.value.trim());
                 this.$set(this.editMode, _id, false);
             }
@@ -129,6 +134,10 @@ export default {
             this.$set(this.editMode, _id, false);
         },
         // End List DB Submit Buttn
+
+        loadMore() {
+            this.limit += this.perPage;
+        },
 
         activate() {
             this.$startMeteor()
@@ -148,6 +157,6 @@ export default {
         countLinks() {
             return this.links ? this.links.length : 0;
         }
-    }
+    },
 };
 </script>
