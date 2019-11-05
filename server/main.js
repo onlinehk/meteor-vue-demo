@@ -5,8 +5,8 @@ import { WebApp } from 'meteor/webapp';
 
 if (Meteor.isServer) {
 	Meteor.publish('links', function (limit, search) {
-		Meteor._sleepForMs(1000);
-		return Links.find({ "title": { $regex: new RegExp(search, "i") }}, {sort: { createdAt: -1 }, limit: limit});
+		// Meteor._sleepForMs(1000);
+		return Links.find({ "title": { $regex: new RegExp(search, "i") } }, {sort: { createdAt: -1 }, limit: limit});
 	});
 
 	Meteor.methods({

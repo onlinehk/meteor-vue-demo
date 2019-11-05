@@ -1,7 +1,9 @@
+@import '{}/imports/ui/App/App.scss';
+
 $mainColor: #40b883;
 
 body {
-	font-family: sans-serif;
+	// font-family: sans-serif;
 	h1 { color: $mainColor; }
 }
 

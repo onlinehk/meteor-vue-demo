@@ -26,7 +26,7 @@ Vue.mixin(globalMixin);
 import routerFactory from './routes';
 
 // Main app
-import AppLayout from '/client/ui/AppLayout.vue';
+import AppLayout from '/imports/ui/AppLayout.vue';
 
 Meteor.startup(() => {
   // Start the router

@@ -8,14 +8,14 @@ const routerFactory = new RouterFactory({
 });
 
 // Components
-import MainNav from '/client/ui/MainNav.vue';
-import App from '/client/ui/App/App.vue';
-import Test from '/client/ui/Test/Test.vue';
-import TestPage1 from '/client/ui/Test/TestPage1.vue';
-import TestPage2 from '/client/ui/Test/TestPage2.vue';
-import About from '/client/ui/AboutPage.vue';
-import ErrorNav from '/client/ui/ErrorNav.vue';
-import ErrorPage from '/client/ui/ErrorPage.vue';
+import MainNav from '/imports/ui/MainNav.vue';
+import App from '/imports/ui/App/App.vue';
+import Test from '/imports/ui/Test/Test.vue';
+import TestPage1 from '/imports/ui/Test/TestPage1.vue';
+import TestPage2 from '/imports/ui/Test/TestPage2.vue';
+import About from '/imports/ui/AboutPage.vue';
+import ErrorNav from '/imports/ui/ErrorNav.vue';
+import ErrorPage from '/imports/ui/ErrorPage.vue';
 
 RouterFactory.configure(router => {
     router.addRoutes([
