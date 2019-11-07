@@ -15,6 +15,9 @@ export const globalMixin = {
             var year = date.getFullYear();
             // return day + ' ' + monthNames[monthIndex] + ' ' + year;
             return year + '-' + monthIndex + '-' + day + ' ' + hours + ':' + mins + ':' + sec;
+        },
+        isInteger(obj) {
+            return parseInt(obj, 10) === obj;
         }
     }
 }

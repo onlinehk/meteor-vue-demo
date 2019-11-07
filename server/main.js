@@ -4,9 +4,9 @@ import prerenderio from 'prerender-node';
 import { WebApp } from 'meteor/webapp'; 
 
 if (Meteor.isServer) {
-	Meteor.publish('links', function (limit, search) {
+	Meteor.publish('links', function (limit, search, skip) {
 		// Meteor._sleepForMs(1000);
-		return Links.find({ "title": { $regex: new RegExp(search, "i") } }, {sort: { createdAt: -1 }, limit: limit});
+		return Links.find({ "title": { $regex: new RegExp(search, "i") } }, {sort: { createdAt: -1 }, limit: limit, skip: skip});
 	});
 
 	Meteor.methods({

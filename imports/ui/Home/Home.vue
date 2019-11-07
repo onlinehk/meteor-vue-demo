@@ -1,7 +1,7 @@
 <template>
 <div class="app">
 	<h1>Simple Meteor example using Vue 2.x</h1>
-	<img src="images/human.jpg" width="200">
+	<img src="/images/human.jpg" width="200">
 	<p>
 		You pressed the button {{count}} time(s).
 	</p>
@@ -32,7 +32,14 @@
 	<hr />
 	<div v-if="links && links.length == 0 && search">Empty</div>
 	<div v-else>
-		<div v-for="link in links" :key="link._id">
+        <!-- Back -->
+        <div v-if="currPage > 1"><div class="text-center" style="padding: 15px 0"><button class="btn btn-primary" @click="back">上一頁</button></div></div>
+		<div ref="datas" v-for="(link, index) in links" :key="link._id">
+            <!-- Page Top -->
+            <div v-if="index % perPage == 0" class="text-center btn-success" :class="'page_'+ Math.ceil((currPage + index / perPage))" style="padding: 5px; margin-bottom:15px">
+                第 {{ Math.ceil(currPage + index / perPage) }} 頁
+            </div>
+
 			<div v-if="!editMode[link._id]">
 				<p>Title: <b>{{link.title}}</b></p>
 				<p>URL: <a :href="link.url">{{link.url}}</a></p>
@@ -53,14 +60,24 @@
 					<button class="btn btn-danger" @click="cancelSubmit(link._id)">Cancel Submit</button>
 				</form>
 			</div>
+
+            <!-- Page Bottom -->
+            <div v-if="index % perPage == perPage - 1" :class="'pageBottom_'+ (Math.ceil((currPage + index) / perPage))"></div>
+
 			<hr />
 		</div>
 	</div>
-    <div v-if="!$subReady.links">Loading...</div>
+    <div v-if="!$subReady.links" class="text-center">Loading...</div>
     <div v-if="limit == links.length">
         <div class="text-center"><button class="btn btn-primary" @click="loadMore">Load More</button></div>
     </div>
 	<p>Total: {{countLinks}}</p>
+    <footer></footer>
 </div>
 </template>
-<script src="App.js"></script>
+<script src="Home.js"></script>
+<style scoped>
+footer{
+    padding: 200px 0;
+}
+</style>

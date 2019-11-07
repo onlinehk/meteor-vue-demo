@@ -1,7 +1,7 @@
 import { Session } from 'meteor/session';
 // import Test from '../Test.vue';
 // import { Links } from '/lib/collections';
-import { meteors } from '/imports/api/app';
+import { meteors } from '/imports/api/home';
 
 Session.setDefault("counter", 0);
 
@@ -21,12 +21,32 @@ export default {
             newTitle: 'Demo',
             newURL: 'http://www.test.com',
             search: '',
-            searchStr: '',
             perPage: 3,
-            limit: 3
+            limit: 3,
+            currPage: 1,
         }
     },
+
+    created() {
+        // Get Page Number
+        let getPage = parseInt(this.$route.params.page);
+        if (this.isInteger(getPage)) {
+            this.currPage = getPage;
+        }
+
+        // Set Title
+        DocHead.setTitle('Meteor + Vue (Page: ' + this.currPage + ')');
+    },
+
     methods: {
+        activate() {
+            this.$startMeteor()
+        },
+
+        deactivate() {
+            this.$stopMeteor()
+        },
+
         addOne() {
             Session.set('counter', this.count + 1);
             this.count = Session.get('counter');
@@ -37,7 +57,7 @@ export default {
         addData() {
             if (this.newTitle && this.newURL) {
                 Meteor.call('addData', this.newTitle, this.newURL);
-                this.newTitle = '';
+                this.newTitle = 'Demo';
                 this.newURL = 'http://www.test.com';
             }
         },
@@ -50,8 +70,6 @@ export default {
         // Delete DB
         deleteData(_id) {
             Meteor.call('deleteData', _id);
-            this.newTitle = 'Demo';
-            this.newURL = '';
         },
         // End Delete DB
 
@@ -70,26 +88,50 @@ export default {
         // End List DB Submit Buttn
 
         loadMore() {
+            console.log('Load More');
             this.limit += this.perPage;
         },
 
-        activate() {
-            this.$startMeteor()
+        back() {
+            console.log('back');
+            this.currPage -= 1;
+            this.limit += this.perPage;
+            this.$router.replace({ path: '/home/page/' + this.currPage });
+            DocHead.setTitle('Meteor + Vue (Page: ' + this.currPage + ')');
         },
 
-        deactivate() {
-            this.$stopMeteor()
-        },
+        scrollUpdatePage(lengths) {
+            let self = this;
+            $(window).on('scroll', function () {
+                let scrollTop = $(window).scrollTop();
+                for (let index = 0; index < lengths; index++) {
+                    if ($('.page_' + index).length > 0 &&
+                        scrollTop >= $('.page_' + index).offset().top &&
+                        scrollTop <= $('.pageBottom_' + index).offset().top &&
+                        this.currPage != index) {
+                        console.log('Page ' + index);
+                        this.currPage = index;
+                        const path = '/home/page/' + index;
+                        if (self.$router.currentRoute.path != path) {
+                            self.$router.replace({ path: path });
+                            DocHead.setTitle('Meteor + Vue (Page: ' + this.currPage + ')');
+                        }
+                    }
+                }
+            });
+        }
     },
-    // components: {
-    //     Test,
-    // },
-    metaInfo: {
-        title: 'Meteor + Vue',
-    },
+
     computed: {
         countLinks() {
-            return this.links ? this.links.length : 0;
+            let lengths;
+            if (this.links) {
+                lengths = this.links.length;
+                this.scrollUpdatePage(lengths);
+            } else {
+                lengths = 0;
+            }
+            return lengths;
         }
     },
 };

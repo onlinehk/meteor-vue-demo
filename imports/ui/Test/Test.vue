@@ -43,8 +43,8 @@ export default {
 	data: () => ({
 		message: 'Test Page',
 	}),
-	metaInfo: {
-        title: 'Meteor + Vue (Test)',
-    },
+	created() {
+        DocHead.setTitle('Meteor + Vue (Test)');
+    }
 }
 </script>

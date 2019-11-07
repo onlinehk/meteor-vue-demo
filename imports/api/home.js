@@ -2,11 +2,9 @@ import { Links } from '/lib/collections';
 
 export const meteors = {
     meteor: {
-        // Subscriptions
         $subscribe: {
-            // We subscribe to the 'links' publication
             'links': function () {
-                return [this.limit, this.search];
+                return [this.limit, this.search, this.perPage * this.currPage - this.perPage];
             }
         },
         links() {

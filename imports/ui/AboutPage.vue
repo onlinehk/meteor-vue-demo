@@ -16,11 +16,8 @@ export default {
 	data: () => ({
 		message: 'About Page',
 	}),
-	metaInfo: {
-    title: 'Meteor + Vue (About 3)',
-    meta: [
-      {property: 'og:image', content: 'https://www.shiseidohk.com/newshiseidomakeup/insyncallways/assets/images/share/share_img_fb.jpg?v=5'}
-    ]
-  },
+	created() {
+    DocHead.setTitle('Meteor + Vue (About)');
+  }
 }
 </script>

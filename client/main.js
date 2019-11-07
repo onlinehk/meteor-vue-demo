@@ -9,9 +9,6 @@ import './main.html';
 import VueTracker from 'vue-meteor-tracker';
 Vue.use(VueTracker);
 
-import VueMeta from 'vue-meta';
-Vue.use(VueMeta);
-
 import BootstrapVue from 'bootstrap-vue';
 Vue.use(BootstrapVue);
 import 'bootstrap/dist/css/bootstrap.css';
@@ -23,7 +20,7 @@ Vue.use(animated);
 import { globalMixin } from '/imports/js/main';
 Vue.mixin(globalMixin);
 
-import routerFactory from './routes';
+import routerFactory from '/imports/js/routes';
 
 // Main app
 import AppLayout from '/imports/ui/AppLayout.vue';
