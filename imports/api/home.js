@@ -8,6 +8,7 @@ export const meteors = {
             }
         },
         links() {
+            this.totalLinks = Counts.get('totalLinks');
             var rtn = Links.find({}, { sort: { createdAt: -1 } }).fetch();
             for (const key in rtn) {
                 if (rtn[key].createdAt) {
@@ -17,6 +18,7 @@ export const meteors = {
                     rtn[key].updatedAt = this.formatDate(rtn[key].updatedAt);
                 }
             }
+            this.scrollUpdatePage(rtn.length);
             return rtn;
         }
     }

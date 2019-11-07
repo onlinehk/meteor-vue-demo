@@ -108,30 +108,17 @@ export default {
                     if ($('.page_' + index).length > 0 &&
                         scrollTop >= $('.page_' + index).offset().top &&
                         scrollTop <= $('.pageBottom_' + index).offset().top &&
-                        this.currPage != index) {
+                        this.currentPage != index) {
                         console.log('Page ' + index);
-                        this.currPage = index;
+                        this.currentPage = index;
                         const path = '/home/page/' + index;
                         if (self.$router.currentRoute.path != path) {
                             self.$router.replace({ path: path });
-                            DocHead.setTitle('Meteor + Vue (Page: ' + this.currPage + ')');
+                            DocHead.setTitle('Meteor + Vue (Page: ' + this.currentPage + ')');
                         }
                     }
                 }
             });
-        }
-    },
-
-    computed: {
-        countLinks() {
-            let lengths;
-            if (this.links) {
-                lengths = this.links.length;
-                this.scrollUpdatePage(lengths);
-            } else {
-                lengths = 0;
-            }
-            return lengths;
         }
     },
 };

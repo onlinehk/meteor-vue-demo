@@ -34,9 +34,11 @@
 	<div v-else>
         <!-- Back -->
         <div v-if="currPage > 1"><div class="text-center" style="padding: 15px 0"><button class="btn btn-primary" @click="back">上一頁</button></div></div>
+
+		<!-- Load Data -->
 		<div ref="datas" v-for="(link, index) in links" :key="link._id">
             <!-- Page Top -->
-            <div v-if="index % perPage == 0" class="text-center btn-success" :class="'page_'+ Math.ceil((currPage + index / perPage))" style="padding: 5px; margin-bottom:15px">
+            <div v-if="index % perPage == 0" class="text-center btn-success" :class="'page_'+ Math.ceil(currPage + index / perPage)" style="padding: 5px; margin-bottom:15px">
                 第 {{ Math.ceil(currPage + index / perPage) }} 頁
             </div>
 
@@ -48,7 +50,7 @@
 				<button class="btn btn-primary" @click="editData(link._id)">Edit</button>
 				<button class="btn btn-danger" @click="deleteData(link._id)">Delete</button>
 			</div>
-			<div v-if="editMode[link._id]">
+			<div v-else>
 				<form :ref="'form_'+link._id" @submit.prevent="editSubmit(link._id)">
 					<div class="form-group">
 						Title: <input class="form-control" name="title" :value="link.title" />
@@ -62,16 +64,29 @@
 			</div>
 
             <!-- Page Bottom -->
-            <div v-if="index % perPage == perPage - 1" :class="'pageBottom_'+ (Math.ceil((currPage + index) / perPage))"></div>
+            <div v-if="index % perPage == perPage - 1" :class="'pageBottom_'+ (Math.ceil(currPage + index / perPage) - 1)"></div>
 
 			<hr />
 		</div>
+		<!-- End Load Data -->
 	</div>
+
+	<!-- Total -->
     <div v-if="!$subReady.links" class="text-center">Loading...</div>
-    <div v-if="limit == links.length">
+
+	<!-- Last Page Bottom -->
+	<div v-if="links.length != perPage" :class="'pageBottom_'+ (Math.ceil(totalLinks / perPage))"></div>
+
+	<!-- Load More -->
+    <div v-if="limit == links.length && totalLinks / this.$route.params.page != perPage">
         <div class="text-center"><button class="btn btn-primary" @click="loadMore">Load More</button></div>
     </div>
-	<p>Total: {{countLinks}}</p>
+	<div v-else>
+		<div class="text-center">- Last -</div>
+	</div>
+
+	<p>Total: {{totalLinks}}</p>
+
     <footer></footer>
 </div>
 </template>
