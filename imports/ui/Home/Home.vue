@@ -35,7 +35,7 @@
         <!-- Back -->
         <div v-if="currPage > 1"><div class="text-center" style="padding: 15px 0"><button class="btn btn-primary" @click="back">上一頁</button></div></div>
 
-		<!-- Load Data -->
+		<!-- Loop Data -->
 		<div ref="datas" v-for="(link, index) in links" :key="link._id">
             <!-- Page Top -->
             <div v-if="index % perPage == 0" class="text-center btn-success" :class="'page_'+ Math.ceil(currPage + index / perPage)" style="padding: 5px; margin-bottom:15px">
@@ -68,11 +68,8 @@
 
 			<hr />
 		</div>
-		<!-- End Load Data -->
+		<!-- End Loop Data -->
 	</div>
-
-	<!-- Total -->
-    <div v-if="!$subReady.links" class="text-center">Loading...</div>
 
 	<!-- Last Page Bottom -->
 	<div v-if="links.length != perPage" :class="'pageBottom_'+ (Math.ceil(totalLinks / perPage))"></div>
@@ -84,6 +81,9 @@
 	<div v-else>
 		<div class="text-center">- Last -</div>
 	</div>
+
+	<!-- Loading Data -->
+    <div v-if="!$subReady.links" class="text-center">Loading...</div>
 
 	<p>Total: {{totalLinks}}</p>
 

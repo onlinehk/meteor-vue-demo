@@ -1,5 +1,5 @@
 import { Session } from 'meteor/session';
-// import Test from '../Test.vue';
+// import Test from '../Test/Test.vue';
 // import { Links } from '/lib/collections';
 import { meteors } from '/imports/api/home';
 
